@@ -3,10 +3,13 @@ export default function json2html(data) {
   // Create the table with the required data-user attribute
   let html = '<table data-user="vamshikrishna788sai@gmail.com">';
 
-  // Create the table headers based on the keys in the first object
+  // Define the expected columns
+  const columns = ['Name', 'Age', 'Gender'];
+
+  // Create the table headers
   html += "<thead><tr>";
-  Object.keys(data[0]).forEach((key) => {
-    html += `<th>${key}</th>`;
+  columns.forEach((column) => {
+    html += `<th>${column}</th>`;
   });
   html += "</tr></thead>";
 
@@ -14,8 +17,9 @@ export default function json2html(data) {
   html += "<tbody>";
   data.forEach((item) => {
     html += "<tr>";
-    Object.keys(item).forEach((key) => {
-      html += `<td>${item[key]}</td>`;
+    columns.forEach((column) => {
+      // Ensure each row has values for Name, Age, and Gender
+      html += `<td>${item[column] || ''}</td>`; // If missing, show empty cell
     });
     html += "</tr>";
   });
